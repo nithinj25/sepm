@@ -63,3 +63,18 @@ flowchart LR
 | POST / PUT | `/api/admin/departments` | Admin |
 
 Errors use standard status codes: `400` invalid input, `401` not logged in, `403` wrong role, `404` not found, `409` slot already taken.
+
+## Security and privacy
+
+- Passwords hashed with bcrypt; login returns a JWT with an expiry
+- Role-based access control: every endpoint checks the user's role (table above)
+- Patients see only their own appointments; doctors see only their own schedule
+- HTTPS only; secrets (database URL, JWT secret, email password) kept in environment variables, never in the repo
+- Every request body validated; parameterised SQL only (no string-built queries) to prevent SQL injection
+
+### Ethical considerations
+
+- Appointment reasons and dates are health-related personal data: collect only what is needed, ask for consent at registration, and follow the principles of India's Digital Personal Data Protection Act, 2023
+- Admins can see appointment lists but not more patient detail than they need
+- Notifications never put the visit reason in the email subject line
+- The system must stay usable for older patients: simple language and large buttons
