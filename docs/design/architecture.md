@@ -78,3 +78,20 @@ Errors use standard status codes: `400` invalid input, `401` not logged in, `403
 - Admins can see appointment lists but not more patient detail than they need
 - Notifications never put the visit reason in the email subject line
 - The system must stay usable for older patients: simple language and large buttons
+
+## Deployment diagram
+
+```mermaid
+flowchart LR
+    U[User's browser] -- HTTPS --> V
+    subgraph V["Vercel"]
+        S[Static frontend]
+        F[Serverless API functions]
+    end
+    S --> F
+    F -- SSL --> DB[(Managed PostgreSQL)]
+    F -- SMTP/API --> M[[Email provider]]
+    GH[GitHub repo] -- push to main --> V
+```
+
+Details: [../deployment.md](../deployment.md)
