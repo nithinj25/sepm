@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OHAMS – Login</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header><h1>OHAMS · Online Hospital Appointment Management</h1></header>
+  <div class="card login">
+    <h2>Log in</h2>
+    <p id="denied" class="hidden" style="color:#b71c1c">Please log in with the right role to open that page.</p>
+    <label for="role">Role</label>
+    <select id="role">
+      <option value="doctor">Doctor</option>
+      <option value="admin">Admin</option>
+    </select>
+    <div id="doctorPick">
+      <label for="doctor">Doctor</label>
+      <select id="doctor"></select>
+    </div>
+    <p><button class="primary" id="go">Log in</button></p>
+    <p style="font-size:12px;color:#52606d">Demo build – mock data, no password.</p>
+  </div>
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    const data = Store.load();
+    const docSel = document.getElementById("doctor");
+    data.doctors.filter((d) => d.active).forEach((d) => docSel.add(new Option(d.name, d.id)));
+    const roleSel = document.getElementById("role");
+    roleSel.onchange = () => document.getElementById("doctorPick").classList.toggle("hidden", roleSel.value !== "doctor");
+    if (new URLSearchParams(location.search).has("denied")) document.getElementById("denied").classList.remove("hidden");
+    document.getElementById("go").onclick = () => {
+      Auth.login(roleSel.value, roleSel.value === "doctor" ? docSel.value : null);
+      location.href = roleSel.value + ".html";
+    };
+  </script>
+</body>
+</html>
