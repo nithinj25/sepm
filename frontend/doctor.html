@@ -15,6 +15,7 @@
     <div class="row tabs">
       <button data-tab="today" class="active">Today</button>
       <button data-tab="week">This week</button>
+      <button data-tab="availability">Availability</button>
     </div>
 
     <section id="today" class="card">
@@ -31,6 +32,21 @@
         <thead><tr><th>Date</th><th>Time</th><th>Patient</th><th>Reason</th><th>Status</th></tr></thead>
         <tbody id="weekRows"></tbody>
       </table>
+    </section>
+
+    <section id="availability" class="card hidden">
+      <h2>Weekly working hours</h2>
+      <table>
+        <thead><tr><th>Day</th><th>Start</th><th>End</th><th>Active</th></tr></thead>
+        <tbody id="availRows"></tbody>
+      </table>
+      <h3>Leave days</h3>
+      <div class="row">
+        <input type="date" id="leaveDate">
+        <button onclick="addLeave()">Add</button>
+      </div>
+      <ul id="leaveList"></ul>
+      <p><button class="primary" onclick="saveAvailability()">Save</button> <span id="saved"></span></p>
     </section>
   </main>
 

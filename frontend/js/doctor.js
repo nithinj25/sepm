@@ -39,6 +39,47 @@ function render() {
   document.getElementById("weekRows").innerHTML = week.join("") || `<tr><td colspan="5">Nothing booked.</td></tr>`;
 }
 
+// ---- Availability editor (PUT /api/doctors/me/availability in the real API) ----
+const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+function renderAvailability() {
+  const slots = data.availability[user.doctorId] || [];
+  document.getElementById("availRows").innerHTML = DAYS.map((name, day) => {
+    const s = slots.find((x) => x.day === day) || { start: "09:00", end: "13:00", active: false };
+    return `<tr data-day="${day}"><td>${name}</td>
+      <td><input type="time" value="${s.start}"></td>
+      <td><input type="time" value="${s.end}"></td>
+      <td><input type="checkbox" ${s.active ? "checked" : ""}></td></tr>`;
+  }).join("");
+  const leave = data.leave[user.doctorId] || [];
+  document.getElementById("leaveList").innerHTML = leave.map((d) => `<li>${d}</li>`).join("") || "<li>None</li>";
+}
+
+function addLeave() {
+  const d = document.getElementById("leaveDate").value;
+  if (!d) return;
+  data.leave[user.doctorId] = [...new Set([...(data.leave[user.doctorId] || []), d])].sort();
+  renderAvailability();
+}
+
+function saveAvailability() {
+  const rows = [...document.querySelectorAll("#availRows tr")];
+  const slots = [];
+  for (const tr of rows) {
+    const [start, end, active] = tr.querySelectorAll("input");
+    if (active.checked && end.value <= start.value) {
+      alert(DAYS[tr.dataset.day] + ": end time must be after start time");
+      return;
+    }
+    slots.push({ day: Number(tr.dataset.day), start: start.value, end: end.value, active: active.checked });
+  }
+  data.availability[user.doctorId] = slots;
+  Store.save(data);
+  document.getElementById("saved").textContent = "Saved ✓";
+}
+
+renderAvailability();
+
 document.querySelectorAll(".tabs button").forEach((btn) => {
   btn.onclick = () => {
     document.querySelectorAll(".tabs button").forEach((b) => b.classList.toggle("active", b === btn));
