@@ -54,3 +54,17 @@ flowchart TD
     C[Status = CANCELLED,<br/>save cancelled_by and reason] --> F[Slot becomes free]
     F --> M[Notify the other party] --> X
 ```
+
+## Appointment states
+
+```mermaid
+stateDiagram-v2
+    [*] --> BOOKED : patient books
+    BOOKED --> BOOKED : reschedule
+    BOOKED --> CANCELLED : patient / doctor / admin cancels
+    BOOKED --> COMPLETED : doctor marks after visit
+    BOOKED --> NO_SHOW : doctor marks, patient absent
+    CANCELLED --> [*]
+    COMPLETED --> [*]
+    NO_SHOW --> [*]
+```
