@@ -1,4 +1,4 @@
-const user = Auth.user() || { role: "doctor", doctorId: "d1" };
+const user = Auth.require("doctor") || { doctorId: null };
 let data = Store.load();
 const me = data.doctors.find((d) => d.id === user.doctorId);
 document.getElementById("who").textContent = me ? me.name : "";

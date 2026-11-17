@@ -54,3 +54,15 @@ Low-fidelity layouts for the doctor and admin dashboards.
 | Departments    [+ Add department]                        |
 +----------------------------------------------------------+
 ```
+
+## Screenshots (demo build)
+
+| Screen | |
+|---|---|
+| Login / role picker | ![login](../screenshots/01-login.png) |
+| Doctor – today | ![doctor today](../screenshots/02-doctor-today.png) |
+| Doctor – this week | ![doctor week](../screenshots/03-doctor-week.png) |
+| Doctor – availability | ![availability](../screenshots/04-doctor-availability.png) |
+| Admin | ![admin](../screenshots/05-admin.png) |
+
+Role guard: opening `doctor.html` or `admin.html` without the matching role sends the user back to the login page.

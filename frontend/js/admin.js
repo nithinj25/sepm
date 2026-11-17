@@ -1,3 +1,4 @@
+Auth.require("admin");
 let data = Store.load();
 
 const badge = (s) => `<span class="badge ${s}">${s.replace("_", "-").toUpperCase()}</span>`;

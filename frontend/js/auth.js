@@ -11,4 +11,13 @@ const Auth = {
     sessionStorage.removeItem("ohams_user");
     location.href = "index.html";
   },
+  // Role guard: send the user back to login if they open a page for another role.
+  require(role) {
+    const u = this.user();
+    if (!u || u.role !== role) {
+      location.href = "index.html?denied=" + role;
+      return null;
+    }
+    return u;
+  },
 };
