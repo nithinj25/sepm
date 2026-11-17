@@ -68,3 +68,26 @@ stateDiagram-v2
     COMPLETED --> [*]
     NO_SHOW --> [*]
 ```
+
+## Business rules
+
+| Rule | Value |
+|---|---|
+| Slot length | Per doctor (`slot_duration_min`, default 15 min) |
+| Booking window | Today up to 30 days ahead; past slots never shown |
+| Patient cancellation | Allowed until 2 hours before the slot |
+| Doctor / admin cancellation | Any time, reason required |
+| Double booking | Blocked by the database unique index; API returns `409` and the patient picks again |
+| Reschedule | Old slot released and new slot taken in one transaction |
+| Completed / No-show | Only the doctor, only after the slot start time |
+
+## Notification triggers
+
+| Event | Notified | Channel |
+|---|---|---|
+| Booked | Patient, Doctor | Email + in-app |
+| Rescheduled | Patient, Doctor | Email + in-app |
+| Cancelled | The other party | Email + in-app |
+| 24 h before visit | Patient | Email |
+
+Agreed with the notification module owner (OHAMS-15).
