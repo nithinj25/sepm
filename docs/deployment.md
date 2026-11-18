@@ -2,6 +2,8 @@
 
 Target: **Vercel**, deployed from the `main` branch of this repo.
 
+**Production URL:** https://sepm-two.vercel.app
+
 ## Steps
 
 1. Vercel → *Add New Project* → import `nithinj25/sepm`. Vercel reads [`vercel.json`](../vercel.json): no build step, serves `frontend/`.
@@ -28,6 +30,7 @@ The current demo build is static and uses mock data, so steps 3–5 apply once t
 | Step | Status |
 |---|---|
 | `vercel.json` and `.env.example` in repo | Done |
+| Environment variables in Vercel | Not needed yet – the static demo reads none; add the `.env.example` names when the backend is connected |
 | Vercel project created and linked | Done – project `sepm`, Git-connected to `main` |
-| Database provisioned | Pending (needs backend) |
-| Smoke test on live URL | Pending |
+| Database provisioned | Not needed for the demo build (mock data); schema ready in `docs/design/schema.sql` for when the backend is connected |
+| Smoke test on live URL | Done – login, doctor dashboard (mark done, availability), role guard, admin dashboard; no console errors |

@@ -2,6 +2,8 @@
 
 Allow patients to book appointments and doctors to manage their schedules.
 
+**Live demo:** https://sepm-two.vercel.app (pick Doctor or Admin on the login page – mock data, no password)
+
 Software Engineering & Project Management (SEPM) team project – BMSIT&M.
 
 ## Team
@@ -32,4 +34,4 @@ frontend/        static demo UI (doctor and admin dashboards, mock data)
 
 ## Running the demo
 
-Open `frontend/index.html` in a browser (no build step). Pick a role to see the doctor or admin dashboard. Data is mock data stored in the browser.
+Use the live demo above, or open `frontend/index.html` in a browser (no build step). Pick a role to see the doctor or admin dashboard. Data is mock data stored in the browser.
