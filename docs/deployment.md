@@ -28,6 +28,6 @@ The current demo build is static and uses mock data, so steps 3–5 apply once t
 | Step | Status |
 |---|---|
 | `vercel.json` and `.env.example` in repo | Done |
-| Vercel project created and linked | Pending |
+| Vercel project created and linked | Done – project `sepm`, Git-connected to `main` |
 | Database provisioned | Pending (needs backend) |
 | Smoke test on live URL | Pending |
